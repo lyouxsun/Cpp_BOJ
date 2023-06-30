@@ -6,16 +6,16 @@
 using namespace std;
 
 int board[50][50];
-int cnt=0;
 
 int BW(int x, int y){   //x,y는 8*8의 시작점
+    int cnt=0;
     for(int i=0;i<8;i++){
         for (int j=0;j<8;j++){
-            if((i+j)%2==0){
-                if(board[i][j]!=1) cnt++;
+            if((i+j)%2==0){     //B일 때
+                if(board[x+i][y+j]==0) cnt++;
             }
             else{
-                if(board[i][j]!=0) cnt++;
+                if(board[x+i][y+j]==1) cnt++;
             }
         }
     }
@@ -23,13 +23,14 @@ int BW(int x, int y){   //x,y는 8*8의 시작점
 }
 
 int WB(int x, int y){   //x,y는 8*8의 시작점
+    int cnt=0;
     for(int i=0;i<8;i++){
         for (int j=0;j<8;j++){
             if((i+j)%2==0){
-                if(board[i][j]!=0) cnt++;
+                if(board[x+i][y+j]==1) cnt++;
             }
             else{
-                if(board[i][j]!=1) cnt++;
+                if(board[x+i][y+j]==0) cnt++;
             }
         }
     }
@@ -54,8 +55,9 @@ int main(){
     for(int i=0;i+8<=a;i++){
         for(int j=0;j+8<=b;j++){
             tempAnswer=min(BW(i,j), WB(i,j));
+            //cout<<"i:"<<i<<" j:"<<j<<" BW:"<<BW(i, j)<<" WB:"<<WB(i,j)<<"\n";
+            answer=min(answer, tempAnswer);
         }
-        answer=min(answer, tempAnswer);
     }
     cout<<answer;
 }
