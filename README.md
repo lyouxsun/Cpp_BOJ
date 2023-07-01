@@ -1,1 +1,3 @@
 # Algorithm-cpp
+- BreuteForce
+- Sort

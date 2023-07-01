@@ -4,35 +4,30 @@
 #include <cstring>
 using namespace std;
 
+bool compare(string a, string b){
+        if(a.length()<b.length()){
+            return true;
+        }
+        else if(a.length()>b.length()){
+            return false;
+        }
+        else{
+            return strcmp(a.c_str(),b.c_str())<0;
+        }
+}
+
 int main(){
     int num;
+    int min=100;
+    string tmp;
     cin >> num;
-    string arr[num];
+    vector <string> v;
     for(int i=0;i<num;i++){
-        cin>>arr[i];
+        cin>>tmp;
+        v.push_back(tmp);
     }
-
-    sort(arr, arr+num);
-
-    for(int i=0;i<num;i++){
-        for(int j=1;i+j<num;j++){
-            const char *str1=arr[i].c_str();
-            const char *str2=arr[i+j].c_str();
-            if(i+j==num-1){
-                arr[i+j]="\n";
-            }
-            if(strcmp(str1, str2)==0){
-                arr[i+j]=arr[i+j+1];
-            }
-        }
-    }
-
-
-    for(int i=0;i<num;i++){
-        if(arr[i+1]=="\0"){
-            cout<<arr[i];
-            break;
-        }
-        cout<<arr[i]<<"\n";
-    }
+    
+    sort(v.begin(), v.end(), compare);
+    v.erase(unique(v.begin(), v.end()), v.end());
+    for(const auto& n:v) cout<<n<<"\n";
 }
