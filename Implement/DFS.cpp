@@ -3,13 +3,11 @@
 이 부분에서 i<=N이 아닌 i<N으로 설정하여 계속 오류가 났다.
 앞으로 이런 경우에는 코드 맨 윗부분에 주의사항으로 적어두기!!!
 */
-//배열을 이용하여 (무방향)그래프 구현 후 DFS
 #include <iostream>
 #include <vector>
 using namespace std;
 int vertexNum;
-int cnt=0;  //연결요소 개수 세는 변수
-int visited[1009];
+int visited[1010];
 vector<vector<int>> arr;
 
 void Graph(int vertexNum, int edgeNum);
@@ -35,15 +33,7 @@ int main(){
     for(int i=1;i<=vertexNum;i++){
         if(visited[i]==0){
             DFS(arr, visited, i);
-            cnt++;
-            //cout<<"cnt : "<<i;
         }
-    }
-    if(edgeNum==0){
-        cout<<vertexNum;
-    }
-    else{
-        cout<<cnt;
     }
 }
 
@@ -64,6 +54,7 @@ void AddEdge(vector<vector<int>>& arr, int edge1, int edge2){
 
 //DFS함수
 void DFS(vector<vector<int>>& arr, vector<int>& visited, int start){
+    cout<<"> "<<start;
     visited[start]=1;
     for(int i=1;i<=vertexNum;i++){
         if(arr[start][i]==1 && visited[i]==0){
