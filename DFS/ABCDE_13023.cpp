@@ -18,25 +18,26 @@ vector<vector<int>> graph(int vertex, int edge){
     return g;
 }
 
-void DFS(vector<vector<int>>& v, int start){
+void DFS(vector<vector<int>>& v, int now){
     //cout<<"start:"<<start<<" depth:"<<depth<<'\n';
     if(depth>=5) {
         return;
     }
     
-    for(int i=0;i<v[start].size();i++){
-        int next = *(v[start].begin()+i);
+    for(int i=0;i<v[now].size();i++){
+        int next = v[now][i];
         if(!visited[next]){
             visited[next]=1;
             depth++;
             DFS(v, next);
+            visited[next]=0;    
+            //i로 탐색을 시작하는 모든 DFS의 결과(순서)를 다 고려하게됨
         } 
         if(depth>=5){
             return;
         }   
     }
     //탐색하지 않은 노드가 남아있을 때에만 depth--;
-    //모두 다 탐색했으면 returnn depth;
     for(int i=0;i<vertex;i++){
         if(!visited[i]) {
             //cout<<"방문하지 않은 노드:"<<i<<'\n';
@@ -44,7 +45,6 @@ void DFS(vector<vector<int>>& v, int start){
             depth--;
             return;
         }
-        visited[i]=0;
     }
 }
 
